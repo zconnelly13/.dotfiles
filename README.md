@@ -13,4 +13,4 @@ All of the directories in .vim/bundles/ are empty because they are populated wit
 
 ###Salt
 
-Everything in this repo is managed with salt here
+Everything in this repo is managed with salt [here](https://github.com/zconnelly13/salt)
