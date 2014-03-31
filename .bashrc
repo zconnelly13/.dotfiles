@@ -113,10 +113,17 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# this will search the files in the current directory and all sub-directories for the string passed in
+# usage: search foo
 function search() { find . | xargs grep "$@";}
+
+# git autocompletion
 if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
 
+# print out a flippy-table guy if the last command errored out
 export PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w $([[ $? != 0 ]] && echo "\[\033[01;31m\](╯°□°）╯︵ ┻━┻) \[\033[01;34m\]")\$\[\033[00m\] '
+
+# use vi in the terminal!
 set -o vi
