@@ -11,8 +11,8 @@ Plugin 'ervandew/supertab'
 Plugin 'scrooloose/syntastic'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'marijnh/tern_for_vim'
-Plugin 'Shougo/neocomplcache.vim'
-let g:neocomplcache_enable_at_startup = 1
+"Plugin 'Shougo/neocomplcache.vim'
+"let g:neocomplcache_enable_at_startup = 1
 
 " Dvorak Motion
 :nnoremap h <Down>
