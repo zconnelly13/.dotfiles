@@ -51,13 +51,13 @@ Plugin 'marijnh/tern_for_vim'
 :nnoremap { <C-w><Down>
 :nnoremap } <C-w><Up>
 
-"Autocomplete
-":inoremap <Tab> <C-n>
-
+" Control-d to delete into a null buffer
+" this is useful when you want to delete before pasting and not override
+" what's in your pase buffer
 :nnoremap <C-d> "_d
 
 "Committing
-:nnoremap <C-m> :!hg com -m ""<Left>
+:nnoremap <C-m> :!git commit -a -m ""<Left>
 
 "E goes to end of word
 :nnoremap E ea
