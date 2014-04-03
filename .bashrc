@@ -127,3 +127,8 @@ export PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w $([[ $? != 0 ]] && echo "\[\0
 
 # use vi in the terminal!
 set -o vi
+
+#virtualenvwrapper stuff
+export WORKON_HOME=$HOME/.virtualenvs
+source /usr/local/bin/virtualenvwrapper.sh
+export PIP_VIRTUALENV_BASE=$WORKON_HOME
