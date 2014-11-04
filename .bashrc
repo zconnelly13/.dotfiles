@@ -122,8 +122,28 @@ if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
 
-# print out a flippy-table guy if the last command errored out
-export PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w $([[ $? != 0 ]] && echo "\[\033[01;31m\](╯°□°）╯︵ ┻━┻) \[\033[01;34m\]")\$\[\033[00m\] '
+# print out a random cutesy error message if the last command errored out
+get_random_failure_message () {
+  failure_messages=(
+    "o(╯□╰)o"
+    "(╯°□°）╯︵ ┻━┻)"
+    "死定了，囧"
+    "失败了"
+    "好丢脸"
+    "笨蛋"
+    "注定"
+  )
+  RANDOM=$(( ( RANDOM % 1337 )  + 1 ))
+  failure_message=${failure_messages[$RANDOM % ${#failure_messages[@]}]}
+  return 0
+}
+
+set_bash_prompt () {
+  get_random_failure_message
+  export PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w $([[ $? != 0 ]] && echo "\[\033[01;31m\]$failure_message \[\033[01;34m\]")\$ \[\033[00m\]'
+}
+
+PROMPT_COMMAND=set_bash_prompt
 
 # use vi in the terminal!
 set -o vi
