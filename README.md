@@ -8,6 +8,7 @@ If you'd like to grab everything, clone this repo into your home directory
 ```
 cd ~
 git clone https://github.com/zconnelly13/dotfiles
+bash install.sh # THIS WILL SLAY YOUR DOTFILES AND NEVER LOOK BACK PROCEED WITH CAUTION
 ```
 
 Else if you'd like to pick and choose, see ```.bashrc``` and ```.vimrc```
