@@ -75,7 +75,7 @@ esac
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
+    # alias ls='ls --color=auto'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 
@@ -184,7 +184,7 @@ if [ -f ~/.git-completion.bash ]; then
 fi
 
 # source venv
-source ~/website/vendor/venv/bin/activate
+# source ~/website/vendor/venv/bin/activate
 
 # print out random cutesy error message if the last command errored out
 get_random_failure_message () {
