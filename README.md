@@ -19,7 +19,3 @@ Plugin 'githubUserName/repo'
 This, however, is where a lot of the magic happens.
 
 All of the directories in ```.vim/bundles/``` are empty because they are populated with vundle.
-
-###Salt
-
-Everything in this repo is managed with salt [here](https://github.com/zconnelly13/salt)
