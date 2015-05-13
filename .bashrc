@@ -47,12 +47,12 @@ esac
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+        # We have color support; assume it's compliant with Ecma-48
+        # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+        # a case would tend to support setf rather than setaf.)
+        color_prompt=yes
     else
-	color_prompt=
+        color_prompt=
     fi
 fi
 
@@ -113,8 +113,69 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# this will search the files in the current directory and all sub-directories for the string passed in
-# usage: search foo
+# Customized settings.
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+export PAGER="/usr/bin/less -ins"
+
+# Customized aliases.
+alias c='clear'
+alias ls='ls --color=auto'
+alias l='ls'
+alias ll='ls -la'
+alias la='ls -a'
+alias lh='ls -lh'
+alias now='date -u +%Y-%m-%d-%T'
+
+# Alias & completion options.
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+fi
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
 function search() { find . | xargs grep "$@";}
 
 # git autocompletion
@@ -122,33 +183,76 @@ if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
 
-# print out a random cutesy error message if the last command errored out
+# source venv
+source ~/website/vendor/venv/bin/activate
+
+# print out random cutesy error message if the last command errored out
 get_random_failure_message () {
   failure_messages=(
-    "o(╯□╰)o"
-    "(╯°□°）╯︵ ┻━┻)"
+    ":O"
+    "(-_-)"
     "死定了，囧"
     "失败了"
     "好丢脸"
     "笨蛋"
     "注定"
+    "好惨啊"
+    "你的高手好丢脸"
   )
-  RANDOM=$(( ( RANDOM % 1337 )  + 1 ))
+  RANDOM=$(( ( RANDOM % 133713371337133713371337 )  + 1 ))
   failure_message=${failure_messages[$RANDOM % ${#failure_messages[@]}]}
   return 0
 }
 
 set_bash_prompt () {
   get_random_failure_message
-  export PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w $([[ $? != 0 ]] && echo "\[\033[01;31m\]$failure_message \[\033[01;34m\]")\$ \[\033[00m\]'
+  export PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w $([[ $? != 0 ]] && echo "\[\033[01;31m\]$failure_message \[\033[01;34m\]")\$\[\033[00m\] '
+  history -a
+  history -n
 }
 
 PROMPT_COMMAND=set_bash_prompt
 
-# use vi in the terminal!
+# use vi in the terminal
 set -o vi
 
-#virtualenvwrapper stuff
-export WORKON_HOME=$HOME/.virtualenvs
-source /usr/local/bin/virtualenvwrapper.sh
-export PIP_VIRTUALENV_BASE=$WORKON_HOME
+function tunnel
+{
+    command="ssh -NL 3333:0.0.0.0:5432 $1.counsyl.com";
+    echo $command;
+    eval $command;
+}
+alias test_report_editor='./manage.py test --only-selenium --nologcapture --liveserver=0.0.0.0:8081 counsyl.product.housecall.tests.test_selenium:TestReportEditor'
+
+function _grep_blame
+{
+  local pair=$1
+  local fname=`echo $pair | cut -d ':' -f1`
+  local fnum=`echo $pair | cut -d ':' -f2`
+  git --no-pager blame -L $fnum,$fnum -- $fname
+}
+
+function __grep_blame
+{
+  while read line
+  do
+    _grep_blame $line
+  done 
+}
+
+function grepblame
+{
+  git grep -n "$1" | __grep_blame
+}
+
+alias get='git'
+
+# export PAGER=/usr/local/bin/vimpager
+# alias less=$PAGER
+# alias zless=$PAGER
+
+alias fuck='echo "(╯°□°）╯︵ ┻━┻" '
+fightme="fight me (ง'-')ง"
+alias FUCK='echo $fightme'
+
+tmux rename-window [empty]
