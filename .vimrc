@@ -1,18 +1,27 @@
 "Vundle Stuff
-set nocompatible            
-filetype off                 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-Plugin 'gmarik/vundle'
-filetype plugin indent on     
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim'
 
 "Vundle Plugins
 Plugin 'ervandew/supertab'
 Plugin 'scrooloose/syntastic'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'marijnh/tern_for_vim'
-"Plugin 'Shougo/neocomplcache.vim'
-"let g:neocomplcache_enable_at_startup = 1
+Plugin 'tpope/vim-sleuth'
+Plugin 'tpope/vim-fugitive'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'jtratner/vim-flavored-markdown'
+call vundle#end()
+filetype plugin indent on
+
+" Syntastic Stuff
+:let g:syntastic_python_checkers = ['pep8','pylint','flake8']
+:let g:syntastic_css_checkers = ['csslint']
+:let g:syntastic_coffeescript_checkers = ['coffeelint']
 
 " Dvorak Motion
 :nnoremap h <Down>
@@ -41,8 +50,8 @@ Plugin 'marijnh/tern_for_vim'
 :set so=5
 
 " Tab Settings
-:set tabstop=4
-:set shiftwidth=4
+:set tabstop=2
+:set shiftwidth=2
 :set expandtab
 
 " Vimdiff
@@ -66,4 +75,20 @@ Plugin 'marijnh/tern_for_vim'
 :set t_Co=256
 :filetype plugin on
 :syntax on
-:colorscheme candy
+:colorscheme Tomorrow-Night-Eighties
+
+:set backupdir=~/.vim/tmp/
+
+" Remove trailing whitespace on file save
+autocmd BufWritePre *.py :%s/\s\+$//e
+autocmd BufWritePre *.html :%s/\s\+$//e
+
+" Markdown syntax highlighting
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
+" Scrolling
+:set mouse=a
+
+" Renaming tmux panes
+autocmd BufEnter,BufReadPost,FileReadPost,BufNewFile,BufWritePre * call system("tmux rename-window " . expand("%:t"))
+autocmd VimLeave * call system("tmux rename-window [empty]")
