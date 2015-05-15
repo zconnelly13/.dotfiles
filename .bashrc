@@ -257,6 +257,7 @@ function tunnel
     eval $command;
 }
 alias test_report_editor='./manage.py test --only-selenium --nologcapture --liveserver=0.0.0.0:8081 counsyl.product.housecall.tests.test_selenium:TestReportEditor'
+alias run='tmux rename-window runserver; cd ~/website/counsyl/product/; ./manage.py runserver 0.0.0.0:8000'
 alias sp='tmux rename-window shellplus; python ~/website/counsyl/product/manage.py shellplus'
 alias c='clear; tmux rename-window [empty];'
 alias w='cd ~/website/counsyl/product'
