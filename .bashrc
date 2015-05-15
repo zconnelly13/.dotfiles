@@ -216,14 +216,7 @@ PROMPT_COMMAND=set_bash_prompt
 # use vi in the terminal
 set -o vi
 
-function tunnel
-{
-    command="ssh -NL 3333:0.0.0.0:5432 $1.counsyl.com";
-    echo $command;
-    eval $command;
-}
-alias test_report_editor='./manage.py test --only-selenium --nologcapture --liveserver=0.0.0.0:8081 counsyl.product.housecall.tests.test_selenium:TestReportEditor'
-
+# grepblame
 function _grep_blame
 {
   local pair=$1
@@ -245,14 +238,24 @@ function grepblame
   git grep -n "$1" | __grep_blame
 }
 
+# IM IN A HURRY DAMMIT
 alias get='git'
 
-# export PAGER=/usr/local/bin/vimpager
-# alias less=$PAGER
-# alias zless=$PAGER
-
+# ugh
 alias fuck='echo "(╯°□°）╯︵ ┻━┻" '
 fightme="fight me (ง'-')ง"
 alias FUCK='echo $fightme'
 
+# set window's name to empty when I open it
 tmux rename-window [empty]
+
+# Counsyl Specific Stuff
+function tunnel
+{
+    command="tmux rename-window tunnel; ssh -NL 3333:0.0.0.0:5432 $1.counsyl.com;";
+    echo $command;
+    eval $command;
+}
+alias test_report_editor='./manage.py test --only-selenium --nologcapture --liveserver=0.0.0.0:8081 counsyl.product.housecall.tests.test_selenium:TestReportEditor'
+alias sp='tmux rename-window shellplus; python ~/website/counsyl/product/manage.py shellplus'
+alias c='clear; tmux rename-window [empty];'
