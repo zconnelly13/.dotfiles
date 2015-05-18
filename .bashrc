@@ -195,9 +195,8 @@ get_random_failure_message () {
     "失败了"
     "好丢脸"
     "笨蛋"
-    "注定"
     "好惨啊"
-    "你的高手好丢脸"
+    "蜗牛都比你跑地快"
   )
   RANDOM=$(( ( RANDOM % 133713371337133713371337 )  + 1 ))
   failure_message=${failure_messages[$RANDOM % ${#failure_messages[@]}]}
