@@ -260,3 +260,12 @@ alias run='tmux rename-window runserver; cd ~/website/counsyl/product/; ./manage
 alias sp='tmux rename-window shellplus; python ~/website/counsyl/product/manage.py shellplus'
 alias c='clear; tmux rename-window [empty];'
 alias w='cd ~/website/counsyl/product'
+
+function miner
+{
+  command="wget https://rubygems.org/downloads/$1.gem && sudo gem install $1"
+  echo $command
+  eval $command
+}
+
+alias gitree="git log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
