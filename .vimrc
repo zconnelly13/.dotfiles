@@ -79,6 +79,15 @@ filetype plugin indent on
 
 :set backupdir=~/.vim/tmp/
 
+" Remove trailing ending lines
+function TrimEndLines()
+    let save_cursor = getpos(".")
+    :silent! %s#\($\n\s*\)\+\%$##
+    call setpos('.', save_cursor)
+endfunction
+
+au BufWritePre *.py call TrimEndLines()
+
 " Remove trailing whitespace on file save
 autocmd BufWritePre *.py :%s/\s\+$//e
 autocmd BufWritePre *.html :%s/\s\+$//e
@@ -92,3 +101,6 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 " Renaming tmux panes
 autocmd BufEnter,BufReadPost,FileReadPost,BufNewFile,BufWritePre * call system("tmux rename-window " . expand("%:t"))
 autocmd VimLeave * call system("tmux rename-window [empty]")
+
+" Share clipboard in tmux
+set clipboard=unnamed
