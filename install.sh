@@ -5,7 +5,7 @@ for dot in $(ls -A); do
 		ln -sf "$PWD/$dot" "$target"
 	fi
 done
-git clone https://github.com/gmarik/vundle.git "$HOME/.vim/bundle/vundle" &> /dev/null
+git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim &> /dev/null
 vim +PluginInstall +qall
 # Uncomment the appropriate lines
 
