@@ -258,6 +258,7 @@ function tunnel
 alias test_report_editor='./manage.py test --only-selenium --nologcapture --liveserver=0.0.0.0:8081 counsyl.product.housecall.tests.test_selenium:TestReportEditor'
 alias run='tmux rename-window runserver; cd ~/website/counsyl/product/; ./manage.py runserver 0.0.0.0:8000'
 alias shellplus='tmux rename-window shellplus; python ~/website/counsyl/product/manage.py shellplus'
+alias sp='tmux rename-window shellplus; python ~/website/counsyl/product/manage.py shellplus'
 alias clear='clear; tmux rename-window [empty];'
 alias product='cd ~/website/counsyl/product'
 
@@ -269,5 +270,11 @@ function miner
   eval $command
 }
 
+# More Aliases
+# ============
+
 # the mother of all git visualizations
 alias gitree="git log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
+
+# serve the current directory on port 8000
+alias serve="python -m SimpleHTTPServer 8000"
