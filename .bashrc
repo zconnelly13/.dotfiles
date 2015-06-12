@@ -176,7 +176,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-function search() { find . | xargs grep "$@";}
+function search() { find . | grep "$@";}
 
 # git autocompletion
 if [ -f ~/.git-completion.bash ]; then
@@ -278,3 +278,6 @@ alias gitree="git log --graph --abbrev-commit --decorate --date=relative --forma
 
 # serve the current directory on port 8000
 alias serve="python -m SimpleHTTPServer 8000"
+
+# ngrok
+alias ngrok="~/ngrok/ngrok http 8000"
