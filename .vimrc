@@ -104,3 +104,7 @@ autocmd VimLeave * call system("tmux rename-window [empty]")
 
 " Share clipboard in tmux
 set clipboard=unnamed
+
+" Set search options
+:set incsearch
+:set hlsearch
