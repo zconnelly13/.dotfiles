@@ -281,3 +281,6 @@ alias serve="python -m SimpleHTTPServer 8000"
 
 # ngrok
 alias ngrok="~/ngrok/ngrok http 8000"
+
+# set editor to vim
+export EDITOR=$(which vim)
