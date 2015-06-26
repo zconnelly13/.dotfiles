@@ -75,7 +75,7 @@ filetype plugin indent on
 :set t_Co=256
 :filetype plugin on
 :syntax on
-:colorscheme Tomorrow-Night-Eighties
+:colorscheme xoria256
 
 :set backupdir=~/.vim/tmp/
 

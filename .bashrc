@@ -286,4 +286,4 @@ alias ngrok="~/ngrok/ngrok http 8000"
 export EDITOR=$(which vim)
 
 # set terminal to 256 color
-export TERM=xterm-256color
+export TERM=screen-256color
