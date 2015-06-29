@@ -74,7 +74,6 @@ esac
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
@@ -137,7 +136,6 @@ fi
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
@@ -261,6 +259,12 @@ alias shellplus='tmux rename-window shellplus; python ~/website/counsyl/product/
 alias sp='tmux rename-window shellplus; python ~/website/counsyl/product/manage.py shellplus'
 alias clear='clear; tmux rename-window [empty];'
 alias product='cd ~/website/counsyl/product'
+function test
+{
+  command='tmux rename-window test_runner; cd ~/website/counsyl/product; ./manage.py test --retest --nologcapture --with-progressive'
+  echo $command;
+  eval $command;
+}
 
 # download and install a rubygem
 function miner
