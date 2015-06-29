@@ -33,6 +33,9 @@ filetype plugin indent on
 :nnoremap m :w!<Enter>
 :nnoremap M :q!<Enter>
 
+" Center Screen on Cursor
+:nnoremap <C-m> zz 
+
 " Dvorak Search
 :nnoremap ; /<Up>
 :nnoremap Z N
@@ -40,9 +43,6 @@ filetype plugin indent on
 
 " Replace One Character
 :nnoremap - :exec "normal i".nr2char(getchar())."\e"<CR>
-
-" Center Screen on Cursor
-:nnoremap <Enter> zz
 
 " Settings
 :set smartindent
@@ -64,9 +64,6 @@ filetype plugin indent on
 " this is useful when you want to delete before pasting and not override
 " what's in your pase buffer
 :nnoremap <C-d> "_d
-
-"Committing
-:nnoremap <C-m> :!git commit -a -m ""<Left>
 
 "E goes to end of word
 :nnoremap E ea
