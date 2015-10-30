@@ -249,19 +249,29 @@ tmux rename-window [empty]
 # Counsyl Specific Stuff
 function tunnel
 {
-    command="tmux rename-window tunnel; ssh -NL 3333:0.0.0.0:5432 $1.counsyl.com;";
+    command="tmux rename-window tunnel; ssh -v -N $USER@$1.counsyl.com -L 3333:localhost:5432";
     echo $command;
     eval $command;
 }
 alias test_report_editor='./manage.py test --only-selenium --nologcapture --liveserver=0.0.0.0:8081 counsyl.product.housecall.tests.test_selenium:TestReportEditor'
-alias run='tmux rename-window runserver; cd ~/website/counsyl/product/; ./manage.py runserver 0.0.0.0:8000'
+alias run='tmux rename-window runserver; cd ~/website/counsyl/product/; ./manage.py runserver 0.0.0.0:8000 --novalidate'
+alias cleandb='tmux rename-window cleandb; cd ~/website/counsyl/product/; ./manage.py cleandb'
 alias shellplus='tmux rename-window shellplus; python ~/website/counsyl/product/manage.py shellplus'
 alias sp='tmux rename-window shellplus; python ~/website/counsyl/product/manage.py shellplus'
 alias clear='clear; tmux rename-window [empty];'
 alias product='cd ~/website/counsyl/product'
-function test
+alias prod='git fetch --tags && git show prod'
+alias gc='git checkout -- ~/website/Gemfile.lock'
+alias reset='cd ~/website && make init && make dev-setup && cd counsyl/product && ./manage.py cleandb && ./manage.py housecall_create_fake_gcs --currently-accepting-ondemand && ./manage.py housecall_create_free_slots && ./manage.py load_sql_fixtures hgmd sequencing && ./manage.py housecall_fake_housecall'
+function testr
 {
-  command='tmux rename-window test_runner; cd ~/website/counsyl/product; ./manage.py test --retest --nologcapture --with-progressive'
+  command="tmux rename-window test_runner; cd ~/website/counsyl/product; ./manage.py test --retest --nologcapture --with-progressive --settings=settings_test $1";
+  echo $command;
+  eval $command;
+}
+function testrn
+{
+  command="tmux rename-window test_runner; cd ~/website/counsyl/product; ./manage.py test --nologcapture --with-progressive --settings=settings_test $1";
   echo $command;
   eval $command;
 }
