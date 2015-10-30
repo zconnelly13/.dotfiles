@@ -263,6 +263,7 @@ alias product='cd ~/website/counsyl/product'
 alias prod='git fetch --tags && git show prod'
 alias gc='git checkout -- ~/website/Gemfile.lock'
 alias reset='cd ~/website && make init && make dev-setup && cd counsyl/product && ./manage.py cleandb && ./manage.py housecall_create_fake_gcs --currently-accepting-ondemand && ./manage.py housecall_create_free_slots && ./manage.py load_sql_fixtures hgmd sequencing && ./manage.py housecall_fake_housecall'
+alias reset_testv='manage.sh housecall_create_fake_gcs --currently-accepting-ondemand && manage.sh housecall_create_free_slots && manage.sh load_sql_fixtures hgmd sequencing && manage.sh housecall_fake_housecall'
 function testr
 {
   command="tmux rename-window test_runner; cd ~/website/counsyl/product; ./manage.py test --retest --nologcapture --with-progressive --settings=settings_test $1";
