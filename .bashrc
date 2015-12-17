@@ -275,7 +275,7 @@ alias gc='git checkout -- ~/website/Gemfile.lock'
 alias reset='$(cd ~/website && make init ; make dev-setup ; cd counsyl/product ; ./manage.py cleandb ; ./manage.py housecall_create_fake_gcs --currently-accepting-ondemand ; ./manage.py housecall_create_free_slots ; ./manage.py load_sql_fixtures hgmd sequencing ; ./manage.py housecall_fake_housecall) | pingme reset'
 alias iguana_tunnel='tmux rename-window iguana_tunnel && ssh -NL 6544:localhost:6544 testv-phi-abhik'
 alias pingme='python ~/pingme/ping_me.py'
-
+alias reset_testv='manage.sh housecall_create_fake_gcs --currently-accepting-ondemand && manage.sh housecall_create_free_slots && manage.sh load_sql_fixtures hgmd sequencing && manage.sh housecall_fake_housecall'
 function testr
 {
   command="tmux rename-window test_runner; cd ~/website/counsyl/product; ./manage.py test --retest --nologcapture --with-progressive --settings=settings_test $1 | pingme $1";
