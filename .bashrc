@@ -201,6 +201,16 @@ get_random_failure_message () {
   return 0
 }
 
+# Get Virtual Env
+if [[ $VIRTUAL_ENV != "" ]]
+    then
+      # Strip out the path and just leave the env name
+      venv="(${VIRTUAL_ENV##*/})"
+else
+      # In case you don't have one activated
+      venv=''
+fi
+
 set_bash_prompt () {
   get_random_failure_message
   export PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w $([[ $? != 0 ]] && echo "\[\033[01;31m\]$failure_message \[\033[01;34m\]")\$\[\033[00m\] '
@@ -262,16 +272,26 @@ alias clear='clear; tmux rename-window [empty];'
 alias product='cd ~/website/counsyl/product'
 alias prod='git fetch --tags && git show prod'
 alias gc='git checkout -- ~/website/Gemfile.lock'
-alias reset='cd ~/website && make init && make dev-setup && cd counsyl/product && ./manage.py cleandb && ./manage.py housecall_create_fake_gcs --currently-accepting-ondemand && ./manage.py housecall_create_free_slots && ./manage.py load_sql_fixtures hgmd sequencing && ./manage.py housecall_fake_housecall'
+alias reset='$(cd ~/website && make init ; make dev-setup ; cd counsyl/product ; ./manage.py cleandb ; ./manage.py housecall_create_fake_gcs --currently-accepting-ondemand ; ./manage.py housecall_create_free_slots ; ./manage.py load_sql_fixtures hgmd sequencing ; ./manage.py housecall_fake_housecall) | pingme reset'
+alias iguana_tunnel='tmux rename-window iguana_tunnel && ssh -NL 6544:localhost:6544 testv-phi-abhik'
+alias pingme='python ~/pingme/ping_me.py'
+
 function testr
 {
-  command="tmux rename-window test_runner; cd ~/website/counsyl/product; ./manage.py test --retest --nologcapture --with-progressive --settings=settings_test $1";
+  command="tmux rename-window test_runner; cd ~/website/counsyl/product; ./manage.py test --retest --nologcapture --with-progressive --settings=settings_test $1 | pingme $1";
   echo $command;
   eval $command;
 }
+
 function testrn
 {
-  command="tmux rename-window test_runner; cd ~/website/counsyl/product; ./manage.py test --nologcapture --with-progressive --settings=settings_test $1";
+  command="tmux rename-window test_runner; cd ~/website/counsyl/product; ./manage.py test --nologcapture --with-progressive --settings=settings_test $1 | pingme $1";
+  echo $command;
+  eval $command;
+}
+function testrselenium
+{
+  command="tmux rename-window selenium_test_runner; cd ~/website/counsyl/product; ./manage.py test --retest --run-all --settings=counsyl.product.settings_test --with-seleniumnosefilter --only-new-selenium-tests --selenium-config-preset=local-chrome-xvfb $1 | pingme $1";
   echo $command;
   eval $command;
 }
