@@ -10,3 +10,5 @@ DIGITALMD/
 Gemfile.lock
 Makefile
 *.un~
+*.swo
+*.swp
