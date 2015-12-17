@@ -23,6 +23,9 @@ filetype plugin indent on
 :let g:syntastic_python_checkers = ['pep8','pylint','flake8']
 :let g:syntastic_css_checkers = ['csslint']
 :let g:syntastic_coffeescript_checkers = ['coffeelint']
+:let g:syntastic_json_checkers = ['jsonlint']
+:let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
+
 
 " Dvorak Motion
 :nnoremap h <Down>
@@ -111,3 +114,9 @@ set clipboard=unnamed
 if has("autocmd")
     au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
+
+" I LIKE A LOF OF TABS OKAY
+:set tabpagemax=200
+
+" persistent undo history
+:set undofile
