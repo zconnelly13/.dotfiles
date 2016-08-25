@@ -20,7 +20,7 @@ call vundle#end()
 filetype plugin indent on
 
 " Syntastic Stuff
-:let g:syntastic_python_checkers = ['pep8','pylint','flake8']
+:let g:syntastic_python_checkers = ['flake8']
 :let g:syntastic_css_checkers = ['csslint']
 :let g:syntastic_coffeescript_checkers = ['coffeelint']
 :let g:syntastic_json_checkers = ['jsonlint']
