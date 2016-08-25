@@ -14,7 +14,6 @@ Plugin 'tpope/vim-sleuth'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-markdown'
 Plugin 'flazz/vim-colorschemes'
-Plugin 'kchmck/vim-coffee-script'
 Plugin 'jtratner/vim-flavored-markdown'
 call vundle#end()
 filetype plugin indent on
