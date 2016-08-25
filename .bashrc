@@ -181,9 +181,6 @@ if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
 
-# source venv
-source ~/website/vendor/venv/bin/activate
-
 # print out random cutesy error message if the last command errored out
 get_random_failure_message () {
   failure_messages=(
@@ -248,53 +245,10 @@ function grepblame
 # IM IN A HURRY DAMMIT
 alias get='git'
 
-# ugh
-alias fuck='echo "(╯°□°）╯︵ ┻━┻" '
-fightme="fight me (ง'-')ง"
-alias FUCK='echo $fightme'
-
 # set window's name to empty when I open it
-tmux rename-window [empty]
-
-# Counsyl Specific Stuff
-function tunnel
-{
-    command="tmux rename-window tunnel; ssh -v -N $USER@$1.counsyl.com -L 3333:localhost:5432";
-    echo $command;
-    eval $command;
-}
-alias test_report_editor='./manage.py test --only-selenium --nologcapture --liveserver=0.0.0.0:8081 counsyl.product.housecall.tests.test_selenium:TestReportEditor'
-alias run='tmux rename-window runserver; cd ~/website/counsyl/product/; ./manage.py runserver 0.0.0.0:8000 --novalidate'
-alias cleandb='tmux rename-window cleandb; cd ~/website/counsyl/product/; ./manage.py cleandb'
-alias shellplus='tmux rename-window shellplus; python ~/website/counsyl/product/manage.py shellplus'
-alias sp='tmux rename-window shellplus; python ~/website/counsyl/product/manage.py shellplus'
-alias clear='clear; tmux rename-window [empty];'
-alias product='cd ~/website/counsyl/product'
-alias prod='git fetch --tags && git show prod'
-alias gc='git checkout -- ~/website/Gemfile.lock'
-alias reset='$(cd ~/website && make init ; make dev-setup ; cd counsyl/product ; ./manage.py cleandb ; ./manage.py housecall_create_fake_gcs --currently-accepting-ondemand ; ./manage.py housecall_create_free_slots ; ./manage.py load_sql_fixtures hgmd sequencing ; ./manage.py housecall_fake_housecall) | pingme reset'
-alias iguana_tunnel='tmux rename-window iguana_tunnel && ssh -NL 6544:localhost:6544 testv-phi-abhik'
-alias pingme='python ~/pingme/ping_me.py'
-alias reset_testv='manage.sh housecall_create_fake_gcs --currently-accepting-ondemand && manage.sh housecall_create_free_slots && manage.sh load_sql_fixtures hgmd sequencing && manage.sh housecall_fake_housecall'
-function testr
-{
-  command="tmux rename-window test_runner; cd ~/website/counsyl/product; ./manage.py test --retest --nologcapture --with-progressive --settings=settings_test $1 | pingme $1";
-  echo $command;
-  eval $command;
-}
-
-function testrn
-{
-  command="tmux rename-window test_runner; cd ~/website/counsyl/product; ./manage.py test --nologcapture --with-progressive --settings=settings_test $1 | pingme $1";
-  echo $command;
-  eval $command;
-}
-function testrselenium
-{
-  command="tmux rename-window selenium_test_runner; cd ~/website/counsyl/product; ./manage.py test --retest --run-all --settings=counsyl.product.settings_test --with-seleniumnosefilter --only-new-selenium-tests --selenium-config-preset=local-chrome-xvfb $1 | pingme $1";
-  echo $command;
-  eval $command;
-}
+if [ $TMUX ]; then
+  tmux rename-window [empty]
+fi
 
 # download and install a rubygem
 function miner
@@ -311,7 +265,7 @@ function miner
 alias gitree="git log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
 
 # serve the current directory on port 8000
-alias serve="python -m SimpleHTTPServer 8000"
+alias serve="python -m SimpleHTTPServer 5000"
 
 # ngrok
 alias ngrok="~/ngrok/ngrok http 8000"
@@ -321,3 +275,6 @@ export EDITOR=$(which vim)
 
 # set terminal to 256 color
 export TERM=screen-256color
+
+# Keyword Love
+source ~/keywordlove/venv/bin/activate
