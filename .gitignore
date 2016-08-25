@@ -13,3 +13,5 @@ Makefile
 *.swo
 *.swp
 *.swn
+
+*.vim
