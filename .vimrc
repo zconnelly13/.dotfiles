@@ -112,7 +112,7 @@ set clipboard=unnamed
 
 " Remember line where file was last opened
 if has("autocmd")
-    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
 " I LIKE A LOF OF TABS OKAY
