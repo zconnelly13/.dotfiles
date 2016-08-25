@@ -25,6 +25,9 @@ filetype plugin indent on
 :let g:syntastic_json_checkers = ['jsonlint']
 :let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 
+" Jedi Stuff
+let g:jedi#popup_on_dot = 0
+
 
 " Dvorak Motion
 :nnoremap h <Down>
