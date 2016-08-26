@@ -25,10 +25,6 @@ filetype plugin indent on
 :let g:syntastic_json_checkers = ['jsonlint']
 :let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 
-" Jedi Stuff
-let g:jedi#popup_on_dot = 0
-
-
 " Dvorak Motion
 :nnoremap h <Down>
 :nnoremap t <Up>
@@ -36,19 +32,13 @@ let g:jedi#popup_on_dot = 0
 :nnoremap s <Right>
 
 " Dvorak Save / Quit
-:nnoremap m :w!<Enter>
+:nnoremap m :noh<Enter>:w!<Enter>
 :nnoremap M :q!<Enter>
-
-" Center Screen on Cursor
-:nnoremap <C-m> zz 
 
 " Dvorak Search
 :nnoremap ; /<Up>
 :nnoremap Z N
 :nnoremap z n
-
-" Replace One Character
-:nnoremap - :exec "normal i".nr2char(getchar())."\e"<CR>
 
 " Settings
 :set smartindent
@@ -61,18 +51,15 @@ let g:jedi#popup_on_dot = 0
 :set expandtab
 
 " Vimdiff
-:nnoremap [ <C-w><Left>
-:nnoremap ] <C-w><Right>
-:nnoremap { <C-w><Down>
-:nnoremap } <C-w><Up>
+:nnoremap [ <C-w><Left>^
+:nnoremap ] <C-w><Right>^
+:nnoremap { <C-w><Down>^
+:nnoremap } <C-w><Up>^
 
 " Control-d to delete into a null buffer
 " this is useful when you want to delete before pasting and not override
 " what's in your pase buffer
 :nnoremap <C-d> "_d
-
-"E goes to end of word
-:nnoremap E ea
 
 "Color
 :set t_Co=256
@@ -117,8 +104,34 @@ if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
-" I LIKE A LOF OF TABS OKAY
+" I LIKE A LOT OF OF TABS OKAY
 :set tabpagemax=200
 
 " persistent undo history
 :set undofile
+
+" Don't make backups at all
+set nobackup
+set nowritebackup
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+
+" make searches case-sensitive only if they contain upper-case characters
+set ignorecase smartcase
+
+set winwidth=79
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MULTIPURPOSE TAB KEY
+" Indent if we're at the beginning of a line. Else, do completion.
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
+inoremap <expr> <tab> InsertTabWrapper()
+inoremap <s-tab> <c-n>
