@@ -1,17 +1,5 @@
-# Vendor Results Folders
-PRHW/
-ECW/
-ORCH/
-CUREMD/
-OFFICE_ALLY/
-DIGITALMD/
-
-# :/
-Gemfile.lock
-Makefile
 *.un~
 *.swo
 *.swp
 *.swn
-
 *.vim
