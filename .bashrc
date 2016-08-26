@@ -277,4 +277,6 @@ export EDITOR=$(which vim)
 export TERM=screen-256color
 
 # Keyword Love
-source ~/keywordlove/venv/bin/activate
+# source ~/keywordlove/venv/bin/activate
+
+export PATH="$HOME/.bin:$PATH"

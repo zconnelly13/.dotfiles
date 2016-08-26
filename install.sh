@@ -13,6 +13,10 @@ done
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim &> /dev/null
 vim +PluginInstall +qall
 
+# Install selecta
+curl -s https://raw.githubusercontent.com/garybernhardt/selecta/master/selecta > $HOME/.bin/selecta
+chmod +x $HOME/.bin/selecta
+
 # Make sure .viminfo is owned by you
 chown zac $HOME/.viminfo
 
