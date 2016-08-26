@@ -51,10 +51,10 @@ filetype plugin indent on
 :set expandtab
 
 " Vimdiff
-:nnoremap [ <C-w><Left>^
-:nnoremap ] <C-w><Right>^
-:nnoremap { <C-w><Down>^
-:nnoremap } <C-w><Up>^
+:nnoremap [ <C-W><C-H>
+:nnoremap ] <C-W><C-L>
+:nnoremap { <C-W><C-J>
+:nnoremap } <C-W><C-K>
 
 " Control-d to delete into a null buffer
 " this is useful when you want to delete before pasting and not override
