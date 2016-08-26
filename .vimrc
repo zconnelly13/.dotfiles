@@ -59,6 +59,10 @@ filetype plugin indent on
 :nnoremap { <C-W><C-J>
 :nnoremap } <C-W><C-K>
 
+" Tabs
+:nnoremap N :tabp<Enter>
+:nnoremap S :tabn<Enter>
+
 " Control-d to delete into a null buffer
 " this is useful when you want to delete before pasting and not override
 " what's in your pase buffer
@@ -160,4 +164,5 @@ endfunction
 
 " Find all files in all non-dot directories starting in the working directory.
 " Fuzzy select one of those. Open the selected file with :e.
-nnoremap <leader>t :call SelectaCommand("find * -type f", "", ":vsplit")<cr>
+nnoremap <leader>t :call SelectaCommand("find * -type f", "", ":tabe")<cr>
+nnoremap <leader>s :call SelectaCommand("find * -type f", "", ":vsplit")<cr>

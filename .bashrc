@@ -280,3 +280,5 @@ export TERM=screen-256color
 # source ~/keywordlove/venv/bin/activate
 
 export PATH="$HOME/.bin:$PATH"
+
+alias o="vim \$(find * -type f | selecta)"
