@@ -18,7 +18,7 @@ curl -s https://raw.githubusercontent.com/garybernhardt/selecta/master/selecta >
 chmod +x $HOME/.bin/selecta
 
 # Make sure .viminfo is owned by you
-chown zac $HOME/.viminfo
+sudo chown zac $HOME/.viminfo
 
 # Global Git Config
 git config --global core.excludesfile '~/.gitignore'
