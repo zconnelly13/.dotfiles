@@ -25,8 +25,8 @@ git config --global core.excludesfile '~/.gitignore'
 
 # Uncomment the appropriate lines
 
-git config --global user.email "zac@counsyl.com"
-# git config --global user.email "zconnelly13@gmail.com"
+# git config --global user.email "zac@counsyl.com"
+git config --global user.email "zconnelly13@gmail.com"
 
 git config --global user.name "Zac Connelly"
 

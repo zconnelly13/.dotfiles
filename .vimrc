@@ -25,6 +25,9 @@ filetype plugin indent on
 :let g:syntastic_json_checkers = ['jsonlint']
 :let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 
+" Don't remap my leader keys???
+let g:jedi#goto_assignments_command = ""
+
 " Map Leader
 :let mapleader = ","
 
@@ -60,8 +63,8 @@ filetype plugin indent on
 :nnoremap } <C-W><C-K>
 
 " Tabs
-:nnoremap N :tabp<Enter>
-:nnoremap S :tabn<Enter>
+:nnoremap T :tabp<Enter>
+:nnoremap H :tabn<Enter>
 
 " Control-d to delete into a null buffer
 " this is useful when you want to delete before pasting and not override
@@ -127,21 +130,7 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set ignorecase smartcase
 
 set winwidth=79
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" MULTIPURPOSE TAB KEY
-" Indent if we're at the beginning of a line. Else, do completion.
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
-endfunction
-inoremap <expr> <tab> InsertTabWrapper()
-inoremap <s-tab> <c-n>
+set columns=80
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SELECTA
@@ -163,6 +152,10 @@ function! SelectaCommand(choice_command, selecta_args, vim_command)
 endfunction
 
 " Find all files in all non-dot directories starting in the working directory.
-" Fuzzy select one of those. Open the selected file with :e.
+" Fuzzy select one of those. Open the selected file in various ways.
 nnoremap <leader>t :call SelectaCommand("find * -type f", "", ":tabe")<cr>
 nnoremap <leader>s :call SelectaCommand("find * -type f", "", ":vsplit")<cr>
+nnoremap <leader>e :call SelectaCommand("find * -type f", "", ":e")<cr>
+
+" Git Grep
+nnoremap <leader>g :call SelectaCommand("git grep -n ''", "\| awk -F \":\" '{print \"+\"$2 \" \" $1}'", ":tabe")<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>

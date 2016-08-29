@@ -91,3 +91,5 @@ if [ -e ~/keywordlove/venv/bin/activate ]; then
 fi
 
 export PATH="$HOME/.bin:$PATH"
+
+alias ls='ls --color=auto'
