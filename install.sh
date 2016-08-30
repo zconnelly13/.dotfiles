@@ -14,6 +14,7 @@ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim &> /
 vim +PluginInstall +qall
 
 # Install selecta
+mkdir -p $HOME/.bin
 curl -s https://raw.githubusercontent.com/garybernhardt/selecta/master/selecta > $HOME/.bin/selecta
 chmod +x $HOME/.bin/selecta
 

@@ -92,4 +92,10 @@ fi
 
 export PATH="$HOME/.bin:$PATH"
 
+comma_g () {
+  git grep -in "$1" | selecta | awk -F ":" '{print "+"$2 " " $1}' | xargs -o vim
+}
+
+alias ,g="comma_g"
+
 alias ls='ls --color=auto'
