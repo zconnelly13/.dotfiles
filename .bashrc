@@ -93,7 +93,7 @@ fi
 export PATH="$HOME/.bin:$PATH"
 
 comma_g () {
-  git grep -in "$1" | selecta | awk -F ":" '{print "+"$2 " " $1}' | xargs -o vim
+  vim $(git grep -in "$1" | selecta | awk -F ":" '{print "+"$2 " " $1}')
 }
 
 alias ,g="comma_g"
