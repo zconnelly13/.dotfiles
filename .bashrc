@@ -99,3 +99,7 @@ comma_g () {
 alias ,g="comma_g"
 
 alias ls='ls --color=auto'
+
+export PYTHONDONTWRITEBYTECODE=1
+
+# source ~/keywordlove/venv/bin/activate
