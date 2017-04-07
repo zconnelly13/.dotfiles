@@ -62,7 +62,7 @@ get_random_failure_message () {
 
 set_bash_prompt () {
   get_random_failure_message
-  export PS1='\[\033[01;32m\]\u@mimibot\[\033[01;34m\] \w $([[ $? != 0 ]] && echo "\[\033[01;31m\]$failure_message \[\033[01;34m\]")\$\[\033[00m\] '
+  export PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w $([[ $? != 0 ]] && echo "\[\033[01;31m\]$failure_message \[\033[01;34m\]")\$\[\033[00m\] '
   history -a
   history -n
 }
