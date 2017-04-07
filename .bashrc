@@ -39,7 +39,7 @@ if ! shopt -oq posix; then
 fi
 
 # Customized settings.
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/go/bin
 export PAGER="/usr/bin/less -ins"
 
 # git autocompletion
@@ -50,12 +50,9 @@ fi
 # print out random cutesy error message if the last command errored out
 get_random_failure_message () {
   failure_messages=(
-    "死定了，囧"
-    "失败了"
-    "好丢脸"
-    "笨蛋"
-    "好惨啊"
-    "蜗牛都比你跑地快"
+    "Seufzer"
+    "Fehler"
+    "Traurigkeit..."
   )
   RANDOM=$(( ( RANDOM % 133713371337133713371337 )  + 1 ))
   failure_message=${failure_messages[$RANDOM % ${#failure_messages[@]}]}
@@ -64,7 +61,7 @@ get_random_failure_message () {
 
 set_bash_prompt () {
   get_random_failure_message
-  export PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w $([[ $? != 0 ]] && echo "\[\033[01;31m\]$failure_message \[\033[01;34m\]")\$\[\033[00m\] '
+  export PS1='\[\033[01;32m\]\u@macbook\[\033[01;34m\] \w $([[ $? != 0 ]] && echo "\[\033[01;31m\]$failure_message \[\033[01;34m\]")\$\[\033[00m\] '
   history -a
   history -n
 }
@@ -98,8 +95,12 @@ comma_g () {
 
 alias ,g="comma_g"
 
-alias ls='ls --color=auto'
+# nomac
+# alias ls='ls --color=auto'
 
 export PYTHONDONTWRITEBYTECODE=1
 
 # source ~/keywordlove/venv/bin/activate
+
+export CLICOLOR=1
+export LSCOLORS=GxFxCxDxBxegedabagaced

@@ -6,8 +6,8 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 "Vundle Plugins
-Plugin 'ervandew/supertab'
-Plugin 'scrooloose/syntastic'
+Plugin 'ervandew/supertab' 
+Plugin 'scrooloose/syntastic' 
 Plugin 'davidhalter/jedi-vim'
 Plugin 'marijnh/tern_for_vim'
 Plugin 'tpope/vim-sleuth'
@@ -15,6 +15,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-markdown'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'jtratner/vim-flavored-markdown'
+Plugin 'leafgarland/typescript-vim'
 call vundle#end()
 filetype plugin indent on
 
@@ -23,6 +24,9 @@ filetype plugin indent on
 :let g:syntastic_css_checkers = ['csslint']
 :let g:syntastic_coffeescript_checkers = ['coffeelint']
 :let g:syntastic_json_checkers = ['jsonlint']
+:let g:syntastic_swift_checkers = ['swiftlint']
+:let g:syntastic_typescript_checkers = ['tslint']
+:let g:syntastic_javascript_checkers = ['jshint']
 :let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 
 " Don't remap my leader keys???
@@ -50,10 +54,11 @@ let g:jedi#goto_assignments_command = ""
 :set smartindent
 :set number
 :set so=5
+:set ruler
 
 " Tab Settings
-:set tabstop=2
-:set shiftwidth=2
+:set tabstop=4
+:set shiftwidth=4
 :set expandtab
 
 " Vimdiff
@@ -87,9 +92,11 @@ function TrimEndLines()
 endfunction
 
 au BufWritePre *.py call TrimEndLines()
+au BufWritePre *.ts call TrimEndLines()
 
 " Remove trailing whitespace on file save
 autocmd BufWritePre *.py :%s/\s\+$//e
+autocmd BufWritePre *.ts :%s/\s\+$//e
 autocmd BufWritePre *.html :%s/\s\+$//e
 
 " Markdown syntax highlighting
@@ -109,6 +116,7 @@ set clipboard=unnamed
 :set incsearch
 :set hlsearch
 
+
 " Remember line where file was last opened
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
@@ -123,6 +131,7 @@ endif
 " Don't make backups at all
 set nobackup
 set nowritebackup
+set noswapfile
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
@@ -153,9 +162,9 @@ endfunction
 
 " Find all files in all non-dot directories starting in the working directory.
 " Fuzzy select one of those. Open the selected file in various ways.
-nnoremap <leader>t :call SelectaCommand("find * -type f", "", ":tabe")<cr>
-nnoremap <leader>s :call SelectaCommand("find * -type f", "", ":vsplit")<cr>
-nnoremap <leader>e :call SelectaCommand("find * -type f", "", ":e")<cr>
+nnoremap <leader>t :call SelectaCommand("find . \\( -name 'node_modules' -prune -o -name 'venv' -prune -o -name '.git' -prune \\) -o -print \| grep -v '~'", "", ":tabe")<cr>
+nnoremap <leader>s :call SelectaCommand("find . \\( -name 'node_modules' -prune -o -name 'venv' -prune -o -name '.git' -prune \\) -o -print \| grep -v '~'", "", ":vsplit")<cr>
+nnoremap <leader>e :call SelectaCommand("find . \\( -name 'node_modules' -prune -o -name 'venv' -prune -o -name '.git' -prune \\) -o -print \| grep -v '~'", "", ":e")<cr>
 
 " Git Grep
 nnoremap <leader>g :call SelectaCommand("git grep -ni ''", "\| awk -F \":\" '{print \"+\"$2 \" \" $1}'", ":tabe")<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
