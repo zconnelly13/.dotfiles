@@ -50,9 +50,10 @@ fi
 # print out random cutesy error message if the last command errored out
 get_random_failure_message () {
   failure_messages=(
-    "Seufzer"
-    "Fehler"
-    "Traurigkeit..."
+    "Ich bin Traurig"
+    "Schrecklich"
+    "Furchtbar"
+    "Jetzt ist alles vorbei, denke ich."
   )
   RANDOM=$(( ( RANDOM % 133713371337133713371337 )  + 1 ))
   failure_message=${failure_messages[$RANDOM % ${#failure_messages[@]}]}
