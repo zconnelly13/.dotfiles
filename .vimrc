@@ -27,7 +27,11 @@ filetype plugin indent on
 :let g:syntastic_swift_checkers = ['swiftlint']
 :let g:syntastic_typescript_checkers = ['tslint']
 :let g:syntastic_javascript_checkers = ['jshint']
+:let g:syntastic_markdown_checkers = ['mdl']
 :let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
+
+" Highlight the current line
+:set cursorline
 
 " Don't remap my leader keys???
 let g:jedi#goto_assignments_command = ""
