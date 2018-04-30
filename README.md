@@ -1,7 +1,7 @@
 dotfiles
 ========
 
-###How to Use
+### How to Use
 
 If you'd like to grab everything, clone this repo into your home directory
 
