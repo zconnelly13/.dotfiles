@@ -39,7 +39,7 @@ if ! shopt -oq posix; then
 fi
 
 # Customized settings.
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/go/bin
+export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/go/bin:/Users/$USER/go/bin
 export PAGER="/usr/bin/less -ins"
 
 # git autocompletion
@@ -50,10 +50,11 @@ fi
 # print out random cutesy error message if the last command errored out
 get_random_failure_message () {
   failure_messages=(
-    "Ich bin Traurig"
-    "Schrecklich"
-    "Furchtbar"
+    "Oh nein..."
+    "Ich habe es vermasselt"
+    "Wie peinlich..."
     "Jetzt ist alles vorbei, denke ich."
+    "Mir fehlen die Worte."
   )
   RANDOM=$(( ( RANDOM % 133713371337133713371337 )  + 1 ))
   failure_message=${failure_messages[$RANDOM % ${#failure_messages[@]}]}
@@ -62,7 +63,7 @@ get_random_failure_message () {
 
 set_bash_prompt () {
   get_random_failure_message
-  export PS1='\[\033[01;32m\]\u@macbook\[\033[01;34m\] \w $([[ $? != 0 ]] && echo "\[\033[01;31m\]$failure_message \[\033[01;34m\]")\$\[\033[00m\] '
+  export PS1='\[\033[01;32m\]zac@macbook\[\033[01;34m\] \w $([[ $? != 0 ]] && echo "\[\033[01;31m\]$failure_message \[\033[01;34m\]")\$\[\033[00m\] '
   history -a
   history -n
 }
@@ -105,3 +106,22 @@ export PYTHONDONTWRITEBYTECODE=1
 
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
+
+# thefuck
+eval $(thefuck --alias)
+alias fuc=fuck
+earp () {
+  cat .circleci/config.yml | grep  "earp.*checkout " | grep -o "checkout .*" | cut -d " " -f 2
+}
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Git fuckit
+alias gityolo='git add -A && git commit -m "$(curl -s http://whatthecommit.com/index.txt)" && git push origin "$(git rev-parse --abbrev-ref HEAD)"'
+
+alias love="/Applications/love.app/Contents/MacOS/love"
+
+# gay
+alias gay='touch log.txt; (for _ in {1..100}; do echo "8=============================================================================>" >> log.txt; sleep 0.05; done;) & (tail -f log.txt | lolcat)'

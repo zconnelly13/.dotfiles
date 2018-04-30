@@ -16,19 +16,34 @@ Plugin 'tpope/vim-markdown'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'jtratner/vim-flavored-markdown'
 Plugin 'leafgarland/typescript-vim'
+Plugin 'munshkr/vim-tidal'
+Plugin 'gfontenot/vim-xcode'
+Plugin 'keith/swift.vim'
+Plugin 'tokorom/syntastic-swiftlint.vim'
 call vundle#end()
 filetype plugin indent on
+
+:set encoding=utf-8
 
 " Syntastic Stuff
 :let g:syntastic_python_checkers = ['flake8']
 :let g:syntastic_css_checkers = ['csslint']
 :let g:syntastic_coffeescript_checkers = ['coffeelint']
 :let g:syntastic_json_checkers = ['jsonlint']
-:let g:syntastic_swift_checkers = ['swiftlint']
+:let g:syntastic_swift_checkers = ['swiftlint', 'swiftpm']
 :let g:syntastic_typescript_checkers = ['tslint']
-:let g:syntastic_javascript_checkers = ['jshint']
+:let g:syntastic_javascript_checkers = ['eslint']
 :let g:syntastic_markdown_checkers = ['mdl']
+:let g:syntastic_lua_checkers = ["luac", "luacheck"]
+:let g:syntastic_dart_checkers = ['dartanalyzer']
+:let g:syntastic_stylus_checkers = ['stylint']
 :let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_swift_swiftlint_use_defaults = 1 
+:nnoremap ,n :lnext<enter>
+:nnoremap ,p :lnext<enter>
+:nnoremap ,l :!latexrun % -o %.pdf && open %.pdf<enter>
 
 " Highlight the current line
 :set cursorline
@@ -53,6 +68,9 @@ let g:jedi#goto_assignments_command = ""
 :nnoremap ; /<Up>
 :nnoremap Z N
 :nnoremap z n
+
+" Marks
+:nnoremap ' m
 
 " Settings
 :set smartindent
@@ -97,14 +115,26 @@ endfunction
 
 au BufWritePre *.py call TrimEndLines()
 au BufWritePre *.ts call TrimEndLines()
+au BufWritePre *.js call TrimEndLines()
+au BufWritePre *.jsx call TrimEndLines()
+au BufWritePre *.md call TrimEndLines()
+au BufWritePre *.swift call TrimEndLines()
 
 " Remove trailing whitespace on file save
 autocmd BufWritePre *.py :%s/\s\+$//e
 autocmd BufWritePre *.ts :%s/\s\+$//e
 autocmd BufWritePre *.html :%s/\s\+$//e
+autocmd BufWritePre *.js :%s/\s\+$//e
+autocmd BufWritePre *.jsx :%s/\s\+$//e
+autocmd BufWritePre *.md :%s/\s\+$//e
+autocmd BufWritePre *.styl :%s/\s\+$//e
+autocmd BufWritePre *.swift :%s/\s\+$//e
 
 " Markdown syntax highlighting
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
+" Set .styl files as stylus!?
+autocmd BufNewFile,BufRead *.styl set filetype=stylus
 
 " Scrolling
 :set mouse=a
@@ -114,7 +144,7 @@ autocmd BufEnter,BufReadPost,FileReadPost,BufNewFile,BufWritePre * call system("
 autocmd VimLeave * call system("tmux rename-window [empty]")
 
 " Share clipboard in tmux
-set clipboard=unnamed
+:set clipboard=unnamed
 
 " Set search options
 :set incsearch
