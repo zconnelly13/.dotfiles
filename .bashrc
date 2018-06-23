@@ -70,9 +70,6 @@ set_bash_prompt () {
 
 PROMPT_COMMAND=set_bash_prompt
 
-# use vi in the terminal
-set -o vi
-
 # set window's name to empty when I open it
 if [ $TMUX ]; then
   tmux rename-window [empty]

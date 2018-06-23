@@ -37,6 +37,7 @@ filetype plugin indent on
 :let g:syntastic_lua_checkers = ["luac", "luacheck"]
 :let g:syntastic_dart_checkers = ['dartanalyzer']
 :let g:syntastic_stylus_checkers = ['stylint']
+:let g:syntastic_yaml_checkers = ['yamllint']
 :let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 
 let g:syntastic_always_populate_loc_list = 1
@@ -116,9 +117,12 @@ endfunction
 au BufWritePre *.py call TrimEndLines()
 au BufWritePre *.ts call TrimEndLines()
 au BufWritePre *.js call TrimEndLines()
+au BufWritePre *.ts call TrimEndLines()
 au BufWritePre *.jsx call TrimEndLines()
+au BufWritePre *.list call TrimEndLines()
 au BufWritePre *.md call TrimEndLines()
 au BufWritePre *.swift call TrimEndLines()
+au BufWritePre *.yml call TrimEndLines()
 
 " Remove trailing whitespace on file save
 autocmd BufWritePre *.py :%s/\s\+$//e
@@ -126,9 +130,11 @@ autocmd BufWritePre *.ts :%s/\s\+$//e
 autocmd BufWritePre *.html :%s/\s\+$//e
 autocmd BufWritePre *.js :%s/\s\+$//e
 autocmd BufWritePre *.jsx :%s/\s\+$//e
+autocmd BufWritePre *.list :%s/\s\+$//e
 autocmd BufWritePre *.md :%s/\s\+$//e
 autocmd BufWritePre *.styl :%s/\s\+$//e
 autocmd BufWritePre *.swift :%s/\s\+$//e
+autocmd BufWritePre *.yml :%s/\s\+$//e
 
 " Markdown syntax highlighting
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
@@ -199,6 +205,8 @@ endfunction
 nnoremap <leader>t :call SelectaCommand("find . \\( -name 'node_modules' -prune -o -name 'venv' -prune -o -name '.git' -prune \\) -o -print \| grep -v '~'", "", ":tabe")<cr>
 nnoremap <leader>s :call SelectaCommand("find . \\( -name 'node_modules' -prune -o -name 'venv' -prune -o -name '.git' -prune \\) -o -print \| grep -v '~'", "", ":vsplit")<cr>
 nnoremap <leader>e :call SelectaCommand("find . \\( -name 'node_modules' -prune -o -name 'venv' -prune -o -name '.git' -prune \\) -o -print \| grep -v '~'", "", ":e")<cr>
+
+nnoremap '' ``
 
 " Git Grep
 nnoremap <leader>g :call SelectaCommand("git grep -ni ''", "\| awk -F \":\" '{print \"+\"$2 \" \" $1}'", ":tabe")<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
