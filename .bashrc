@@ -120,5 +120,10 @@ alias gityolo='git add -A && git commit -m "$(curl -s http://whatthecommit.com/i
 
 alias love="/Applications/love.app/Contents/MacOS/love"
 
+# bash completion for Makefiles
+complete -W "\`grep -oE '^[a-zA-Z0-9_.-]+:([^=]|$)' Makefile | sed 's/[^a-zA-Z0-9_.-]*$//'\`" make
+
 # gay
-alias gay='touch log.txt; (for _ in {1..100}; do echo "8=============================================================================>" >> log.txt; sleep 0.05; done;) & (tail -f log.txt | lolcat)'
+alias gay='yes "8=============================================================================>" | lolcat'
+
+export ANSIBLE_VAULT_PASSWORD_FILE=~/.vault_pass.txt

@@ -96,7 +96,7 @@ let g:jedi#goto_assignments_command = ""
 
 " Control-d to delete into a null buffer
 " this is useful when you want to delete before pasting and not override
-" what's in your pase buffer
+" what's in your paste buffer
 :nnoremap <C-d> "_d
 
 "Color

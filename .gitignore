@@ -3,3 +3,5 @@
 *.swp
 *.swn
 *.vim
+
+.DS_Store
