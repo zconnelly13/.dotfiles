@@ -89,10 +89,17 @@ fi
 export PATH="$HOME/.bin:$PATH"
 
 comma_g () {
-  vim $(git grep -in "$1" | selecta | awk -F ":" '{print "+"$2 " " $1}')
+  mvim -v $(git grep -in "$1" | selecta | awk -F ":" '{print "+"$2 " " $1}')
+}
+
+comma_t () {
+  mvim -v $(find . -name 'node_modules' -prune -o -name 'venv' -prune -o -name '.git' -prune -o -print | grep -v "~" | selecta)
 }
 
 alias ,g="comma_g"
+
+alias ,t="comma_t"
+
 
 # nomac
 # alias ls='ls --color=auto'
@@ -127,3 +134,7 @@ complete -W "\`grep -oE '^[a-zA-Z0-9_.-]+:([^=]|$)' Makefile | sed 's/[^a-zA-Z0-
 alias gay='yes "8=============================================================================>" | lolcat'
 
 export ANSIBLE_VAULT_PASSWORD_FILE=~/.vault_pass.txt
+
+alias vim='mvim -v'
+
+alias v='source venv/bin/activate'

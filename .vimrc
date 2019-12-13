@@ -9,7 +9,6 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'ervandew/supertab' 
 Plugin 'scrooloose/syntastic' 
 Plugin 'davidhalter/jedi-vim'
-Plugin 'marijnh/tern_for_vim'
 Plugin 'tpope/vim-sleuth'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-markdown'
@@ -20,6 +19,8 @@ Plugin 'munshkr/vim-tidal'
 Plugin 'gfontenot/vim-xcode'
 Plugin 'keith/swift.vim'
 Plugin 'tokorom/syntastic-swiftlint.vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
 call vundle#end()
 filetype plugin indent on
 
@@ -123,6 +124,8 @@ au BufWritePre *.list call TrimEndLines()
 au BufWritePre *.md call TrimEndLines()
 au BufWritePre *.swift call TrimEndLines()
 au BufWritePre *.yml call TrimEndLines()
+au BufWritePre *.css call TrimEndLines()
+au BufWritePre *.html call TrimEndLines()
 
 " Remove trailing whitespace on file save
 autocmd BufWritePre *.py :%s/\s\+$//e
@@ -135,9 +138,13 @@ autocmd BufWritePre *.md :%s/\s\+$//e
 autocmd BufWritePre *.styl :%s/\s\+$//e
 autocmd BufWritePre *.swift :%s/\s\+$//e
 autocmd BufWritePre *.yml :%s/\s\+$//e
+autocmd BufWritePre *.css :%s/\s\+$//e
 
 " Markdown syntax highlighting
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
+" Auto reload with linter
+autocmd BufNewFile,BufReadPost *.jsx set autoread
 
 " Set .styl files as stylus!?
 autocmd BufNewFile,BufRead *.styl set filetype=stylus
@@ -200,6 +207,12 @@ function! SelectaCommand(choice_command, selecta_args, vim_command)
   exec a:vim_command . " " . selection
 endfunction
 
+" ipdb
+nnoremap <leader>i oimport ipdb;ipdb.set_trace()<Esc>
+
+" go to next linting error
+nnoremap <leader>u :ll<cr>
+
 " Find all files in all non-dot directories starting in the working directory.
 " Fuzzy select one of those. Open the selected file in various ways.
 nnoremap <leader>t :call SelectaCommand("find . \\( -name 'node_modules' -prune -o -name 'venv' -prune -o -name '.git' -prune \\) -o -print \| grep -v '~'", "", ":tabe")<cr>
@@ -207,6 +220,7 @@ nnoremap <leader>s :call SelectaCommand("find . \\( -name 'node_modules' -prune 
 nnoremap <leader>e :call SelectaCommand("find . \\( -name 'node_modules' -prune -o -name 'venv' -prune -o -name '.git' -prune \\) -o -print \| grep -v '~'", "", ":e")<cr>
 
 nnoremap '' ``
+nnoremap <leader>j :%!python3 -m "json.tool"<Enter>
 
 " Git Grep
-nnoremap <leader>g :call SelectaCommand("git grep -ni ''", "\| awk -F \":\" '{print \"+\"$2 \" \" $1}'", ":tabe")<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+nnoremap <leader>g :call SelectaCommand("git grep -ni '' \| grep -v '~'", "\| awk -F \":\" '{print \"+\"$2 \" \" $1}'", ":tabe")<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
