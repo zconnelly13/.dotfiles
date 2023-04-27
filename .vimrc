@@ -21,6 +21,11 @@ Plugin 'keith/swift.vim'
 Plugin 'tokorom/syntastic-swiftlint.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
+Plugin 'chaimleib/vim-renpy'
+Plugin 'jparise/vim-graphql'
+Plugin 'hashivim/vim-terraform'
+Plugin 'rust-lang/rust.vim'
+Plugin 'psf/black'
 call vundle#end()
 filetype plugin indent on
 
@@ -32,8 +37,9 @@ filetype plugin indent on
 :let g:syntastic_coffeescript_checkers = ['coffeelint']
 :let g:syntastic_json_checkers = ['jsonlint']
 :let g:syntastic_swift_checkers = ['swiftlint', 'swiftpm']
-:let g:syntastic_typescript_checkers = ['tslint']
-:let g:syntastic_javascript_checkers = ['eslint']
+:let g:syntastic_typescript_checkers = ['eslint']
+:let g:syntastic_typescript_eslint_exec = 'eslint_d'
+:let g:syntastic_javascript_checkers = ['eslint_d']
 :let g:syntastic_markdown_checkers = ['mdl']
 :let g:syntastic_lua_checkers = ["luac", "luacheck"]
 :let g:syntastic_dart_checkers = ['dartanalyzer']
@@ -45,16 +51,17 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_swift_swiftlint_use_defaults = 1 
 :nnoremap ,n :lnext<enter>
 :nnoremap ,p :lnext<enter>
-:nnoremap ,l :!latexrun % -o %.pdf && open %.pdf<enter>
+:nnoremap ,l :!black %<enter>
 
 " Highlight the current line
 :set cursorline
 
-" Don't remap my leader keys???
-let g:jedi#goto_assignments_command = ""
-
 " Map Leader
 :let mapleader = ","
+
+" Go to Definiton
+let g:jedi#goto_assignments_command = "<leader>o"
+set tags=tags
 
 " Dvorak Motion
 :nnoremap h <Down>
@@ -208,7 +215,7 @@ function! SelectaCommand(choice_command, selecta_args, vim_command)
 endfunction
 
 " ipdb
-nnoremap <leader>i oimport ipdb;ipdb.set_trace()<Esc>
+nnoremap <leader>i oimport ipdb; ipdb.set_trace()  # noqa:E702<Esc>
 
 " go to next linting error
 nnoremap <leader>u :ll<cr>
@@ -224,3 +231,10 @@ nnoremap <leader>j :%!python3 -m "json.tool"<Enter>
 
 " Git Grep
 nnoremap <leader>g :call SelectaCommand("git grep -ni '' \| grep -v '~'", "\| awk -F \":\" '{print \"+\"$2 \" \" $1}'", ":tabe")<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+
+" This must go at the bottom?
+:hi CursorLineNr cterm=NONE
+
+nnoremap <leader>f :!eslint_d % --fix<enter>
+
+nnoremap <leader>b :Git blame<enter>

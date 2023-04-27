@@ -6,8 +6,9 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=10000
-HISTFILESIZE=20000
+HISTSIZE=1000000
+HISTFILESIZE=2000000
+HISTTIMEFORMAT="%F %T "
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -93,10 +94,12 @@ comma_g () {
 }
 
 comma_t () {
-  mvim -v $(find . -name 'node_modules' -prune -o -name 'venv' -prune -o -name '.git' -prune -o -print | grep -v "~" | selecta)
+  mvim -v $(find . -name 'dist-client' -prune -o -name 'dist-server' -prune -o -name 'node_modules' -prune -o -name 'venv' -prune -o -name '.gems' -prune -o -name '.venv' -prune -o -name 'gitlab/develop/source' -prune -o -name '.git' -prune -o -print | grep -v "~" | grep -v ".pyc" | selecta)
 }
 
 alias ,g="comma_g"
+
+alias g="open http://google.com"
 
 alias ,t="comma_t"
 
@@ -111,13 +114,6 @@ export PYTHONDONTWRITEBYTECODE=1
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
-# thefuck
-eval $(thefuck --alias)
-alias fuc=fuck
-earp () {
-  cat .circleci/config.yml | grep  "earp.*checkout " | grep -o "checkout .*" | cut -d " " -f 2
-}
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -127,14 +123,32 @@ alias gityolo='git add -A && git commit -m "$(curl -s http://whatthecommit.com/i
 
 alias love="/Applications/love.app/Contents/MacOS/love"
 
+alias ngrok="/usr/local/bin/ngrok"
+
 # bash completion for Makefiles
 complete -W "\`grep -oE '^[a-zA-Z0-9_.-]+:([^=]|$)' Makefile | sed 's/[^a-zA-Z0-9_.-]*$//'\`" make
+
 
 # gay
 alias gay='yes "8=============================================================================>" | lolcat'
 
-export ANSIBLE_VAULT_PASSWORD_FILE=~/.vault_pass.txt
-
 alias vim='mvim -v'
 
 alias v='source venv/bin/activate'
+alias ll='ls -lh'
+
+export GOPATH=/Users/zac/projects/bluecanvas/go
+
+# Hook for desk activation
+[ -n "$DESK_ENV" ] && source "$DESK_ENV" || true
+
+# This is a very important note
+# Which is why it's going in my bashrc
+# vim /Library/Ruby/Gems/2.6.0/gems/commander-4.1.5/lib/commander/user_interaction.rb Line 328
+# I commmented that out because of some stack overflow post to silence an error
+# so if I see user_interaction errors something something in the future
+# this may be the problem
+. "$HOME/.cargo/env"
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"

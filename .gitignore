@@ -3,5 +3,11 @@
 *.swp
 *.swn
 *.vim
+*.pyc
+
+*__pycache__/*
 
 .DS_Store
+
+dist-server/
+dist-client/
