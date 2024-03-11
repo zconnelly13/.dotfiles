@@ -238,3 +238,5 @@ nnoremap <leader>g :call SelectaCommand("git grep -ni '' \| grep -v '~'", "\| aw
 nnoremap <leader>f :!eslint_d % --fix<enter>
 
 nnoremap <leader>b :Git blame<enter>
+
+nnoremap <leader>c :!python3 %<enter>

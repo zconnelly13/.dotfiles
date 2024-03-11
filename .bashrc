@@ -123,6 +123,8 @@ alias gityolo='git add -A && git commit -m "$(curl -s http://whatthecommit.com/i
 
 alias love="/Applications/love.app/Contents/MacOS/love"
 
+alias tm="tmux -2a || tmux -2"
+
 alias ngrok="/usr/local/bin/ngrok"
 
 # bash completion for Makefiles
