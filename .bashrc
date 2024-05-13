@@ -1,11 +1,11 @@
-# don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
+# Don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options.
 HISTCONTROL=ignoreboth
 
-# append to the history file, don't overwrite it
+# Append to the history file, don't overwrite it.
 shopt -s histappend
 
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+# For setting history length see HISTSIZE and HISTFILESIZE in bash(1).
 HISTSIZE=1000000
 HISTFILESIZE=2000000
 HISTTIMEFORMAT="%F %T "
@@ -40,7 +40,7 @@ if ! shopt -oq posix; then
 fi
 
 # Customized settings.
-export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/go/bin:/Users/$USER/go/bin
+export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/go/bin:/Users/$USER/go/bin:/nix/var/nix/profiles/default/bin/:/Users/zacharyconnelly/.nix-profile/bin
 export PAGER="/usr/bin/less -ins"
 
 # git autocompletion
@@ -48,7 +48,7 @@ if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
 
-# print out random cutesy error message if the last command errored out
+# Print out random cutesy error message if the last command errored out.
 get_random_failure_message () {
   failure_messages=(
     "Oh nein..."
@@ -71,30 +71,20 @@ set_bash_prompt () {
 
 PROMPT_COMMAND=set_bash_prompt
 
-# set window's name to empty when I open it
-if [ $TMUX ]; then
-  tmux rename-window [empty]
-fi
-
 # set editor to vim
 export EDITOR=$(which vim)
 
 # set terminal to 256 color
 export TERM=screen-256color
 
-# Keyword Love
-if [ -e ~/keywordlove/venv/bin/activate ]; then
-  source ~/keywordlove/venv/bin/activate
-fi
-
 export PATH="$HOME/.bin:$PATH"
 
 comma_g () {
-  mvim -v $(git grep -in "$1" | selecta | awk -F ":" '{print "+"$2 " " $1}')
+  vim $(git grep -in "$1" | selecta | awk -F ":" '{print "+"$2 " " $1}')
 }
 
 comma_t () {
-  mvim -v $(find . -name 'dist-client' -prune -o -name 'dist-server' -prune -o -name 'node_modules' -prune -o -name 'venv' -prune -o -name '.gems' -prune -o -name '.venv' -prune -o -name 'gitlab/develop/source' -prune -o -name '.git' -prune -o -print | grep -v "~" | grep -v ".pyc" | selecta)
+  vim $(find . -name 'dist-client' -prune -o -name 'dist-server' -prune -o -name 'node_modules' -prune -o -name 'venv' -prune -o -name '.gems' -prune -o -name '.venv' -prune -o -name 'gitlab/develop/source' -prune -o -name '.git' -prune -o -print | grep -v "~" | grep -v ".pyc" | selecta)
 }
 
 alias ,g="comma_g"
@@ -108,8 +98,6 @@ alias ,t="comma_t"
 # alias ls='ls --color=auto'
 
 export PYTHONDONTWRITEBYTECODE=1
-
-# source ~/keywordlove/venv/bin/activate
 
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
@@ -125,7 +113,7 @@ alias love="/Applications/love.app/Contents/MacOS/love"
 
 alias tm="tmux -2a || tmux -2"
 
-alias ngrok="/usr/local/bin/ngrok"
+# alias ngrok="/usr/local/bin/ngrok"
 
 # bash completion for Makefiles
 complete -W "\`grep -oE '^[a-zA-Z0-9_.-]+:([^=]|$)' Makefile | sed 's/[^a-zA-Z0-9_.-]*$//'\`" make
@@ -134,23 +122,17 @@ complete -W "\`grep -oE '^[a-zA-Z0-9_.-]+:([^=]|$)' Makefile | sed 's/[^a-zA-Z0-
 # gay
 alias gay='yes "8=============================================================================>" | lolcat'
 
-alias vim='mvim -v'
-
 alias v='source venv/bin/activate'
 alias ll='ls -lh'
-
-export GOPATH=/Users/zac/projects/bluecanvas/go
+alias poke='touch'
 
 # Hook for desk activation
 [ -n "$DESK_ENV" ] && source "$DESK_ENV" || true
 
-# This is a very important note
-# Which is why it's going in my bashrc
-# vim /Library/Ruby/Gems/2.6.0/gems/commander-4.1.5/lib/commander/user_interaction.rb Line 328
-# I commmented that out because of some stack overflow post to silence an error
-# so if I see user_interaction errors something something in the future
-# this may be the problem
-. "$HOME/.cargo/env"
-
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
+
+if [ -f /opt/homebrew/etc/bash_completion ]; then
+       . /opt/homebrew/etc/bash_completion
+fi

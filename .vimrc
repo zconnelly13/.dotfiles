@@ -8,7 +8,6 @@ Plugin 'gmarik/Vundle.vim'
 "Vundle Plugins
 Plugin 'ervandew/supertab' 
 Plugin 'scrooloose/syntastic' 
-Plugin 'davidhalter/jedi-vim'
 Plugin 'tpope/vim-sleuth'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-markdown'
@@ -26,6 +25,7 @@ Plugin 'jparise/vim-graphql'
 Plugin 'hashivim/vim-terraform'
 Plugin 'rust-lang/rust.vim'
 Plugin 'psf/black'
+Plugin 'github/copilot.vim'
 call vundle#end()
 filetype plugin indent on
 
